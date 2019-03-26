@@ -1,0 +1,27 @@
+---
+# This Plugin was written by Wertzui123 and you're not allowed to modify or rewrite it!
+# To adjust it, just use the config.yml in the plugin_data/SignIt folder.
+# © 2019 Wertzui123
+#
+# This is the message wich appears when you try to do "/changedisplayname" trough the console
+run_ingame: "§cPlease run this command in-game"
+
+# This is the messages wich appears when you didn't type "/changedisplayname <nickname>"
+usage: "§cUsage: /changedisplayname <nickname>"
+
+# This is the message wich appears when you don't have the permission to use /changedisplayname
+missing_permission: "§cYou don't have the permission to use /changedisplayname"
+
+# This is the format the nickname will be showen
+# Example:
+# nickname_format: "§eNicked: {nickname}"
+# Steve types "/cdn Oreo", then his displayname will change to "§eNicked: Oreo"
+# {nickename} is the new displayname
+# {realname} is the players real name
+# {rank} or {group} is his PurePerms group (I don't think that anyone will use that)
+nickname_format: "§b§l{group}: {nickname}"
+
+# This is the message wich appears when you changed you're display name succesfully
+# {nickname} is the pleayers new displayname
+cdn_succes: "§aYou succesfully changed you're display name to {nickname}!"
+...
