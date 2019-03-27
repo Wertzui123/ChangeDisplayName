@@ -13,7 +13,7 @@ The commands are
 <br>
 <br>and the usage is
 <br>
-<br><b>/changedisplayname <nickname></b>
+<br><b>"/changedisplayname <nickname>"</b>
 <br>
 <br>The permission is
 <br>
