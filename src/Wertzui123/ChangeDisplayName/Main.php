@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace Wertzui123\ChangeDisplayName;
 
 use pocketmine\Player;
-use pocketmine\plugin\PluginBase;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
-use pocketmine\Player;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
-class Main extends PluginBase{
+class Main extends PluginBase implements Listener{
 
 	public function onEnable() : void{
 	    $this->saveResource("config.yml");
@@ -34,17 +32,19 @@ $cdnsucces = $settings->get("cdn_succes");
 $missingpermission = $settings->get("missing_permission");
 $nicker = $sender->getName();
 $nickname = $settings->get("nickname_format");
-if($this->getServer()->getPluginManager()->getPlugin("PurePerms")) {
-	$purePerms = $this->getServer()->getPluginManager()->getPlugin("PurePerms");
-    $group = $purePerms->getUserDataMgr()->getData($sender)['group'];
-} else {
-    $group = "The plugin isn't installed";
-}
 
 		if(!$sender instanceof Player) {
 			$sender->sendMessage($runingame);
 			return true;
 		}
+		
+		if($this->getServer()->getPluginManager()->getPlugin("PurePerms")) {
+	$purePerms = $this->getServer()->getPluginManager()->getPlugin("PurePerms");
+    $group1 = $purePerms->getUserDataMgr()->getData($sender)['group'];
+	$group = $purePerms->getGroup("$group1");
+} else {
+    $group = "The plugin isn't installed";
+}
 		
 		if($sender->hasPermission("cdn.cmd")) {
 				if(empty($args[0])){
@@ -56,8 +56,12 @@ $text = str_replace("{nickname}", $args[0], $cdnsucces);
 $nickname = str_replace("{realname}", $sender->getName(), $nickname);
 $nickname = str_replace("{rank}", $group, $nickname);
 $nickname = str_replace("{group}", $group, $nickname);
-$sender->setDisplayName("$nickname");
-$pperms->setGroup($sender, $ppGroup); 
+$sender->setDisplayName("§r" . $nickname . "§r");
+if($this->getServer()->getPluginManager()->getPlugin("PurePerms")){
+	$purePerms->setGroup($sender, $group); 
+}else{
+	$sender->setNameTag("§r" . $nickname . "§r");
+}
 $sender->sendMessage($text);
       }
       } else{
