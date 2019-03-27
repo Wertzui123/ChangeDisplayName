@@ -4,7 +4,7 @@
 # © 2019 Wertzui123
 #
 # This is the message wich appears when you try to do "/changedisplayname" trough the console
-run_ingame: "§cPlease run this command in-game"
+run_in_game: "§cPlease run this command in-game"
 
 # This is the messages wich appears when you didn't type "/changedisplayname <nickname>"
 usage: "§cUsage: /changedisplayname <nickname>"
@@ -19,9 +19,9 @@ missing_permission: "§cYou don't have the permission to use /changedisplayname"
 # {nickename} is the new displayname
 # {realname} is the players real name
 # {rank} or {group} is his PurePerms group (I don't think that anyone will use that)
-nickname_format: "§b§l{group}: {nickname}"
+nickname_format: "§d{group}: {nickname}"
 
 # This is the message wich appears when you changed you're display name succesfully
 # {nickname} is the pleayers new displayname
-cdn_succes: "§aYou succesfully changed you're display name to {nickname}!"
+cdn_succes: "§aYou succesfully changed you're display name to {nickname}§r§a!"
 ...
