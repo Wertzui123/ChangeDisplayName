@@ -74,6 +74,7 @@ $sender->sendMessage($text);
 	public function onDisable() : void{
 	}
 }
-//This Plugin was written by Wertzui123 and you're not allowed to modify or rewrite it!
-// To adjust it, just use the config.yml in the plugin_data/ChangeDisplayName folder.
+//This Plugin was written by Wertzui123 and you're not allowed to modify, rewrite it or copy the code into you're plugin!
+//You also musn't change the author or the license.
+//To adjust it, just use the config.yml in the plugin_data/ChangeDisplayName folder.
 //© 2019 Wertzui123
