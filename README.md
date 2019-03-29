@@ -35,10 +35,7 @@ You have a question or an idea? Then send it in my discord -> https://discord.gg
 
 # License
 This is the License of ChangeDisplayName
-<br>
-<br><code>This Plugin was written by Wertzui123 and you're not allowed to modify, rewrite it or copy the code into you're plugin!</code>
-<br><code>You also musn't change the author or the license.</code>
-<br><code>To adjust it, just use the config.yml in the plugin_data/ChangeDisplayName folder.</code>
+https://choosealicense.com/licenses/gpl-3.0/
 <br><code>© 2019 Wertzui123</code>
   
   
