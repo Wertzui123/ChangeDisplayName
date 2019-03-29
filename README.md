@@ -35,7 +35,7 @@ You have a question or an idea? Then send it in my discord -> https://discord.gg
 
 # License
 This is the License of ChangeDisplayName
-https://choosealicense.com/licenses/gpl-3.0/
+<br>https://choosealicense.com/licenses/gpl-3.0/<br>
 <br><code>© 2019 Wertzui123</code>
   
   
