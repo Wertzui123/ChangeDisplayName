@@ -1,7 +1,7 @@
 # ChangeDisplayName
 <b>This is a nice plugin to nicked you/ change you're displayname. And the best: It works if you have PurePerms too!</b>
 You can change you're displayname, so that you're name is another in the chat, at the pause screen and so on. But for example tping only works with the real name.
-<br>The .phar file can be found on poggit soon.
+<br>The .phar file can be found on <a href="https://poggit.pmmp.io/ci/Wertzui123/ChangeDisplayName/ChangeDisplayName">poggit</a>.
 <br><b>Have fun!</b>
 
 # Commands
