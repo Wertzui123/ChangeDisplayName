@@ -56,11 +56,11 @@ $text = str_replace("{nickname}", $args[0], $cdnsucces);
 $nickname = str_replace("{realname}", $sender->getName(), $nickname);
 $nickname = str_replace("{rank}", $group, $nickname);
 $nickname = str_replace("{group}", $group, $nickname);
-$sender->setDisplayName("§r" . $nickname . "§r");
+$sender->setDisplayName($nickname . "§r");
 if($this->getServer()->getPluginManager()->getPlugin("PurePerms")){
 	$purePerms->setGroup($sender, $group); 
 }else{
-	$sender->setNameTag("§r" . $nickname . "§r");
+	$sender->setNameTag($nickname . "§r");
 }
 $sender->sendMessage($text);
       }
