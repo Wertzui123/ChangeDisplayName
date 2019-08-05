@@ -1,0 +1,17 @@
+---
+# CHANGEDISPLAYNAME
+cdn_run_ingame: "§cPlease run this command ingame!"
+cdn_succes: "§aYou succesfully changed your displayname to §b{nickname}§a."
+cdn_missing_permissions: "§cYou don't have the permission to use /changedisplayname!"
+
+# REALNAME
+realname_no_player: "§cThere is no player by that displayname!"
+realname_succes: "§aThe realname of §b{displayname} §ais: §e{realname}§a."
+realname_no_permissions: "§cYou don't have the permission to use /realname!"
+
+# UNNICK
+unnick_run_ingame: "§cPlease run this command ingame!"
+unnick_succes_self: "§aYou succesfully resetted your displayname."
+unnick_succes_other: "§aYou succesfully resetted {player}'s displayname."
+unnick_no_permissions: "§cYou don't have the permission to use /unnick!"
+...
