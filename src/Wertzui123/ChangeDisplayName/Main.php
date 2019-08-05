@@ -5,76 +5,62 @@ declare(strict_types=1);
 namespace Wertzui123\ChangeDisplayName;
 
 use pocketmine\Player;
-use pocketmine\command\CommandSender;
-use pocketmine\command\Command;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use Wertzui123\ChangeDisplayName\commands\cdncommand;
+use Wertzui123\ChangeDisplayName\commands\realnamecommand;
+use Wertzui123\ChangeDisplayName\commands\unnickcommand;
 
-class Main extends PluginBase implements Listener{
+class Main extends PluginBase implements Listener
+{
 
-	public function onEnable() : void{
-	    $this->saveResource("config.yml");
-		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-	}
+    private $msgs;
+    private $cfgversion = 3.0;
 
+    public function onEnable(): void
+    {
+        $this->ConfigUpdater($this->cfgversion);
+        $this->msgs = new Config($this->getDataFolder() . "messages.yml", Config::YAML);
+        $cfg = $this->getConfig()->getAll();
+        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new cdncommand($this, ["command" => $cfg["changedisplayname_command"], "description" => $cfg["changedisplayname_description"], "aliases" => $cfg["changedisplayname_aliases"]]));
+        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new realnamecommand($this, ["command" => $cfg["realname_command"], "description" => $cfg["realname_description"], "aliases" => $cfg["realname_aliases"]]));
+        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new unnickcommand($this, ["command" => $cfg["unnick_command"], "description" => $cfg["unnick_description"], "aliases" => $cfg["unnick_aliases"]]));
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
 
+    }
 
-	public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
-		switch($command->getName()){
-	 case "changedisplayname":
-	 
-	 
-	 $settings = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-$runingame = $settings->get("run_in_game");
-$usage = $settings->get("usage");
-$cdnsucces = $settings->get("cdn_succes");
-$missingpermission = $settings->get("missing_permission");
-$nicker = $sender->getName();
-$nickname = $settings->get("nickname_format");
+    public function getMSGS(): Config
+    {
+        return $this->msgs;
+    }
 
-		if(!$sender instanceof Player) {
-			$sender->sendMessage($runingame);
-			return true;
-		}
-		
-		if($this->getServer()->getPluginManager()->getPlugin("PurePerms")) {
-	$purePerms = $this->getServer()->getPluginManager()->getPlugin("PurePerms");
-    $group1 = $purePerms->getUserDataMgr()->getData($sender)['group'];
-	$group = $purePerms->getGroup("$group1");
-} else {
-    $group = "The plugin isn't installed";
+    public function ConfigUpdater($version)
+    {
+        $cfgpath = $this->getDataFolder() . "config.yml";
+        $msgpath = $this->getDataFolder() . "messages.yml";
+        if (file_exists($cfgpath)) {
+            $cfgversion = $this->getConfig()->get("version");
+            if ($cfgversion !== $version) {
+                $this->getLogger()->info("Your config has been renamed to config-" . $cfgversion . ".yml and your messages file has been renamed to messages-" . $cfgversion . ".yml. That's because your config version wasn't the latest avable. So we created a new config and a new messages file for you!");
+                rename($cfgpath, $this->getDataFolder() . "config-" . $cfgversion . ".yml");
+                rename($msgpath, $this->getDataFolder() . "messages-" . $cfgversion . ".yml");
+                $this->saveResource("config.yml");
+                $this->saveResource("messages.yml");
+            }
+        } else {
+            $this->saveResource("config.yml");
+            $this->saveResource("messages.yml");
+        }
+    }
+
+    public function getPlayerByDisplayName($dn): ?Player
+    {
+        foreach ($this->getServer()->getOnlinePlayers() as $player){
+            if($player->getDisplayName() == $dn){
+                return $player;
+            }
+        }
+        return null;
+    }
 }
-		
-		if($sender->hasPermission("cdn.cmd")) {
-				if(empty($args[0])){
-					$sender->sendMessage($usage);
-					return true;
-				} else {
-$nickname = str_replace("{nickname}", $args[0], $nickname);
-$text = str_replace("{nickname}", $args[0], $cdnsucces);
-$nickname = str_replace("{realname}", $sender->getName(), $nickname);
-$nickname = str_replace("{rank}", $group, $nickname);
-$nickname = str_replace("{group}", $group, $nickname);
-$sender->setDisplayName($nickname . "§r");
-if($this->getServer()->getPluginManager()->getPlugin("PurePerms")){
-	$purePerms->setGroup($sender, $group); 
-}else{
-	$sender->setNameTag($nickname . "§r");
-}
-$sender->sendMessage($text);
-      }
-      } else{
-			$sender->sendMessage($missingpermission);
-     }
-     return true;
-		}
-  }
-  
-	public function onDisable() : void{
-	}
-}
-//This Plugin was written by Wertzui123 and you're not allowed to modify, rewrite it or copy the code into you're plugin!
-//You also musn't change the author or the license.
-//To adjust it, just use the config.yml in the plugin_data/ChangeDisplayName folder.
-//© 2019 Wertzui123
