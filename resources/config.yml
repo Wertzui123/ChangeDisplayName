@@ -1,28 +1,26 @@
 ---
-# This Plugin was written by Wertzui123 and you're not allowed to modify, rewrite it or copy the code into you're plugin!
-# You also musn't change the author or the license.
-# To adjust it, just use the config.yml in the plugin_data/ChangeDisplayName folder.
-# © 2019 Wertzui123
+# DON'T EDIT
+config_version: 3.0
 
-# This is the message wich appears when you try to do "/changedisplayname" trough the console
-run_in_game: "§cPlease run this command in-game"
+# COMMANDS
+changedisplayname_command: "changedisplayname"
+realname_command: "realname"
+unnick_command: "unnick"
 
-# This is the messages wich appears when you didn't type "/changedisplayname <nickname>"
-usage: "§cUsage: /changedisplayname <nickname>"
+# DESCRIPTIONS
+changedisplayname_description: "Change your displayname"
+realname_description: "See a nicked players real name"
+unnick_description: "Reset your displayname"
 
-# This is the message wich appears when you don't have the permission to use /changedisplayname
-missing_permission: "§cYou don't have the permission to use /changedisplayname"
+# USAGES
+changedisplayname_usage: "§cUsage: /changedisplayname <nickname>"
+realname_usage: "§cUsage: /realname <displayname>"
 
-# This is the format the nickname will be showen
-# Example:
-# nickname_format: "§eNicked: {nickname}"
-# Steve types "/cdn Oreo", then his displayname will change to "§eNicked: Oreo"
-# {nickename} is the new displayname
-# {realname} is the players real name
-# {rank} or {group} is his PurePerms group (I don't think that anyone will use that)
-nickname_format: "§d{group}: {nickname}"
+# ALIASES
+changedisplayname_aliases: ["cdn", "nick"]
+realname_aliases: []
+unnick_aliases: ["removenick"]
 
-# This is the message wich appears when you changed you're display name succesfully
-# {nickname} is the pleayers new displayname
-cdn_succes: "§aYou succesfully changed you're display name to {nickname}§r§a!"
+# CDN
+nickname_format: "{nickname}"
 ...
