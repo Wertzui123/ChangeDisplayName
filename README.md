@@ -1,6 +1,6 @@
 # ChangeDisplayName
-<b>This is a plugin to set your Nickname/change you're Display Name. And the best: It works if you have PurePerms too!</b>
-- You can change your Display Name, so that you're name is different in chat, at the pause screen and so on.
+<b>This is a plugin to set your Nickname/change your Display Name. And the best: It works if you have PurePerms too!</b>
+- You can change your Display Name, so that your name is different in chat, at the pause screen and so on.
 - Teleporting however, only works with the real name.
 <br>The .phar file can be found on <a href="https://poggit.pmmp.io/ci/Wertzui123/ChangeDisplayName/ChangeDisplayName">poggit</a>.
 <br><b>Have fun!</b>
