@@ -1,29 +1,29 @@
 name: ChangeDisplayName
 main: Wertzui123\ChangeDisplayName\Main
-version: 3.0
+version: "4.0"
 api: 3.0
 load: POSTWORLD
 author: Wertzui123
-description: A plugin to change your displayname in-game!
+description: An advanced nick plugin to change your displayname
 website: https://github.com/Wertzui123/ChangeDisplayName
 permissions:
- cnd:
-  description: Let you use all features of ChangeDisplayName
+ changedisplayname:
+  description: Lets you use all features of ChangeDisplayName
   default: op
   children:
-   cdn.commands:
-    description: Let you use all commands of ChangeDisplayName
+   changedisplayname.commands:
+    description: Lets you use all commands of ChangeDisplayName
     default: op
     children:
-     cdn.cmd.cdn:
-      description: Let you use /changedisplayname
+     changedisplayname.command.nick:
+      description: Lets you use /nick
       default: op
-     cdn.cmd.realname:
-      description: Let you use /realname
+     changedisplayname.command.realname:
+      description: Lets you use /realname
       default: op
-     cdn.cmd.unnick:
-      description: Let you use /unnick
+     changedisplayname.command.unnick:
+      description: Lets you use /unnick
       default: op
-    cdn.unnick.others:
-     description: Let you use /unnick on other players
+    changedisplayname.unnick.others:
+     description: Lets you use /unnick on other players
      default: op

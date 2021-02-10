@@ -5,62 +5,109 @@ declare(strict_types=1);
 namespace Wertzui123\ChangeDisplayName;
 
 use pocketmine\Player;
-use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-use Wertzui123\ChangeDisplayName\commands\cdncommand;
-use Wertzui123\ChangeDisplayName\commands\realnamecommand;
-use Wertzui123\ChangeDisplayName\commands\unnickcommand;
+use pocketmine\utils\TextFormat;
+use Wertzui123\ChangeDisplayName\commands\nick;
+use Wertzui123\ChangeDisplayName\commands\realname;
+use Wertzui123\ChangeDisplayName\commands\unnick;
 
-class Main extends PluginBase implements Listener
+class Main extends PluginBase
 {
 
-    private $msgs;
-    private $cfgversion = 3.0;
+    /** @var float */
+    const CONFIG_VERSION = 4.0;
 
+    /** @var Config */
+    private $stringsFile;
+
+    /**
+     * Called when the plugin enables
+     */
     public function onEnable(): void
     {
-        $this->ConfigUpdater($this->cfgversion);
-        $this->msgs = new Config($this->getDataFolder() . "messages.yml", Config::YAML);
-        $cfg = $this->getConfig()->getAll();
-        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new cdncommand($this, ["command" => $cfg["changedisplayname_command"], "description" => $cfg["changedisplayname_description"], "aliases" => $cfg["changedisplayname_aliases"]]));
-        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new realnamecommand($this, ["command" => $cfg["realname_command"], "description" => $cfg["realname_description"], "aliases" => $cfg["realname_aliases"]]));
-        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new unnickcommand($this, ["command" => $cfg["unnick_command"], "description" => $cfg["unnick_description"], "aliases" => $cfg["unnick_aliases"]]));
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->configUpdater();
+        $this->stringsFile = new Config($this->getDataFolder() . 'strings.yml', Config::YAML);
+        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new nick($this));
+        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new realname($this));
+        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new unnick($this));
 
     }
 
-    public function getMSGS(): Config
+    /**
+     * Checks whether the config version is the latest and updates it if it isn't
+     */
+    private function configUpdater()
     {
-        return $this->msgs;
-    }
-
-    public function ConfigUpdater($version)
-    {
-        $cfgpath = $this->getDataFolder() . "config.yml";
-        $msgpath = $this->getDataFolder() . "messages.yml";
-        if (file_exists($cfgpath)) {
-            $cfgversion = $this->getConfig()->get("version");
-            if ($cfgversion !== $version) {
-                $this->getLogger()->info("Your config has been renamed to config-" . $cfgversion . ".yml and your messages file has been renamed to messages-" . $cfgversion . ".yml. That's because your config version wasn't the latest avable. So we created a new config and a new messages file for you!");
-                rename($cfgpath, $this->getDataFolder() . "config-" . $cfgversion . ".yml");
-                rename($msgpath, $this->getDataFolder() . "messages-" . $cfgversion . ".yml");
-                $this->saveResource("config.yml");
-                $this->saveResource("messages.yml");
-            }
-        } else {
-            $this->saveResource("config.yml");
-            $this->saveResource("messages.yml");
+        if (!file_exists($this->getDataFolder() . 'config.yml')) {
+            $this->saveResource('config.yml');
+            $this->saveResource('strings.yml');
+            return;
+        }
+        if (!$this->getConfig()->exists('config-version')) {
+            $this->getLogger()->info("§eYour config isn't the latest. ChangeDisplayName renamed your old config to §bconfig-old.yml §6and created a new config. Have fun!");
+            rename($this->getDataFolder() . 'config.yml', $this->getDataFolder() . 'config-old.yml');
+            rename($this->getDataFolder() . 'strings.yml', $this->getDataFolder() . 'strings.yml');
+            $this->saveResource('config.yml', true);
+            $this->saveResource('strings.yml', true);
+        } elseif ($this->getConfig()->get('config-version') !== self::CONFIG_VERSION) {
+            $config_version = $this->getConfig()->get('config-version');
+            $this->getLogger()->info("§eYour Config isn't the latest. ChangeDisplayName renamed your old config to §bconfig-" . $config_version . ".yml §6and created a new config. Have fun!");
+            rename($this->getDataFolder() . 'config.yml', $this->getDataFolder() . 'config-' . $config_version . '.yml');
+            rename($this->getDataFolder() . 'strings.yml', $this->getDataFolder() . 'strings-' . $config_version . '.yml');
+            $this->saveResource('config.yml');
+            $this->saveResource('strings.yml');
         }
     }
 
-    public function getPlayerByDisplayName($dn): ?Player
+    /**
+     * Returns the file containing all messages and strings
+     * @return Config
+     */
+    public function getStringsFile(): Config
     {
-        foreach ($this->getServer()->getOnlinePlayers() as $player){
-            if($player->getDisplayName() == $dn){
+        return $this->stringsFile;
+    }
+
+    /**
+     * @internal
+     * Returns a string from the strings file
+     * @param string $key
+     * @param array $replace [optional]
+     * @param mixed $default [optional]
+     * @return string|mixed
+     */
+    public function getString(string $key, $replace = [], $default = "")
+    {
+        return str_replace(array_keys($replace), $replace, $this->getStringsFile()->getNested($key, $default));
+    }
+
+    /**
+     * @internal
+     * Returns a message from the strings file
+     * @param string $key
+     * @param array $replace [optional]
+     * @param mixed $default [optional]
+     * @return string|mixed
+     */
+    public function getMessage(string $key, $replace = [], $default = "")
+    {
+        return $this->getString($key, $replace, $default);
+    }
+
+    /**
+     * Returns a player with the nickname $nickname, or null if not found
+     * @param string $nickname
+     * @return Player|null
+     */
+    public function getPlayerByNickname(string $nickname): ?Player
+    {
+        foreach ($this->getServer()->getOnlinePlayers() as $player) {
+            if (TextFormat::clean($player->getDisplayName()) === TextFormat::clean($nickname)) {
                 return $player;
             }
         }
         return null;
     }
+
 }

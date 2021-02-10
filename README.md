@@ -1,41 +1,46 @@
 # ChangeDisplayName
-<b>This is a plugin to set your Nickname/change your Display Name. And the best: It works if you have PurePerms too!</b>
-- You can change your Display Name, so that your name is different in chat, at the pause screen and so on.
-- Teleporting however, only works with the real name.
+ChangeDisplayName lets you change your displayname (nickname).
 <br>The .phar file can be found on <a href="https://poggit.pmmp.io/ci/Wertzui123/ChangeDisplayName/ChangeDisplayName">poggit</a>.
-<br><b>Have fun!</b>
+
+# Features
+- PurePerms support
+- Custom nickname format
+- Advanced (messages) configuration
+- /realname
+- /unnick
 
 # Commands
-The commands are
-<br>
-<br>-changedisplayname, cdn, nick
-<br>-realname
-<br>-unnick, removenick
-<br>
+## Nick
+Nick yourself
+<br>Usage: /nick <nickname: string>
+<br>Aliases: nickname, changedisplayname, cdn
+<br>Permission: changedisplayname.command.nick
+
+## Realname
+Find out the actual name of a nicked player
+<br>Usage: /realname <player: string>
+<br>Aliases: /
+<br>Permission: changedisplayname.command.realname
+
+## Unnick
+Reset your or someone elses displayname
+<br>Usage: /unnick [player: target]
+<br>Aliases: /
+<br>Permission: changedisplayname.command.unnick
 
 # Permissions
-Permissions can be found in the plugin.yml, too many to list here.
+All command permissions and:
+
+## changedisplayname.unnick.others
+Lets you use /unnick on other players
+<br>Default permission state: op
   
-# Features
-  <br>-Custom nickname format
-  <br>-Custom messages
-  <br>-Works with PurePerms
-  <br>-Works without PurePerms
-  <br>-Fast and free Support
-  <br>
-  
-# Ideas and Questions
-You have a question or an idea? Then send it in my <a href="https://discord.gg/eGhZGtF">discord</a>.
+# Ideas, Questions and Support
+You can contact me in <a href="https://discord.gg/eGhZGtF">my discord server</a> or <a href="https://github.com/Wertzui123/ChangeDisplayName/issues/new">create an issue</a>/<a href="https://github.com/Wertzui123/ChangeDisplayName/discussions/new">start a discussion</a>.
 
 # License
-This is the License of ChangeDisplayName
-<br>https://choosealicense.com/licenses/gpl-3.0/<br>
-<br><code>© 2019 Wertzui123</code>
-  
-  
+ChangeDisplayName is licensed under the GNU General Public License v3.0. For more information: https://choosealicense.com/licenses/gpl-3.0
+<br><code>© 2019 - 2021 Wertzui123</code>
+
 # Credits
-The plugin was written by Wertzui123
-<br>
-  <br>The icon was designed by <code>Icon is coming soon</code>
- <br>
-  <br>You can help me, by reporting bugs and make suggestions!
+ChangeDisplayName was written by Wertzui123.

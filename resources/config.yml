@@ -1,26 +1,37 @@
 ---
-# DON'T EDIT
-config_version: 3.0
-
-# COMMANDS
-changedisplayname_command: "changedisplayname"
-realname_command: "realname"
-unnick_command: "unnick"
-
-# DESCRIPTIONS
-changedisplayname_description: "Change your displayname"
-realname_description: "See a nicked players real name"
-unnick_description: "Reset your displayname"
-
-# USAGES
-changedisplayname_usage: "§cUsage: /changedisplayname <nickname>"
-realname_usage: "§cUsage: /realname <displayname>"
-
-# ALIASES
-changedisplayname_aliases: ["cdn", "nick"]
-realname_aliases: []
-unnick_aliases: ["removenick"]
-
-# CDN
-nickname_format: "{nickname}"
+# ChangeDisplayName - Copyright 2019 - 2021 Wertzui123
+# Don't edit this if you don't know what you're doing
+config-version: 4.0
+# Banned nicknames
+banned_nicknames:
+  - Hacker
+  - Owner
+  - Admin
+  - Support Team
+  - Supporter
+  - Nazi
+  - Team
+  - Staff
+  - Server
+  - Player
+# How the nicknames should be shown
+# {group} represents the PurePerms group
+nickname_format: "{displayname}"
+# Commands
+command:
+  nick:
+    command: nick
+    description: Nick yourself
+    usage: "/nick <nickname: string>"
+    aliases: ['nickname', 'changedisplayname', 'cdn']
+  realname:
+    command: realname
+    description: Find out the actual name of a nicked player
+    usage: "/realname <player: string>"
+    aliases: []
+  unnick:
+    command: unnick
+    description: Reset your or someone elses displayname
+    usage: "/unnick [player: target]"
+    aliases: []
 ...

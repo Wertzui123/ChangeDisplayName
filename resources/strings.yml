@@ -1,0 +1,20 @@
+---
+command:
+  nick:
+    runIngame: "§cPlease run this command ingame!"
+    noPermission: "§cYou don't have the permission to use this command!"
+    passName: "§cPlease pass a nickname!"
+    alreadyTaken: "§cAnother player has already taken this displayname!"
+    success: "§aYou successfully changed your displayname to §b{displayname}§a."
+  realname:
+    noPermission: "§cYou don't have the permission to use this command!"
+    passPlayer: "§cPlease pass a player!"
+    noPlayer: "§cThere is no player by that displayname!"
+    success: "§aThe actual name of §b{displayname} §ais: §e{realname}§a."
+  unnick:
+    runIngame: "§cPlease run this command ingame or not on yourself!"
+    noPermission: "§cYou don't have the permission to use this command!"
+    success:
+      self: "§aYou successfully reset your displayname."
+      other: "§aYou successfully reset {player}'s displayname."
+...
