@@ -24,7 +24,7 @@ class nick extends Command implements PluginIdentifiableCommand
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if (!$sender instanceof Player) {
-            $sender->sendMessage($this->plugin->getMessage($sender, 'command.nick.runIngame'));
+            $sender->sendMessage($this->plugin->getMessage('command.nick.runIngame'));
             return;
         }
         if (!$sender->hasPermission($this->getPermission())) {
