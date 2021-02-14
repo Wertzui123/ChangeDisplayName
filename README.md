@@ -19,13 +19,13 @@ Nick yourself
 ## Realname
 Find out the actual name of a nicked player
 <br>Usage: /realname <player: string>
-<br>Aliases: /
+<br>Aliases: none
 <br>Permission: changedisplayname.command.realname
 
 ## Unnick
 Reset your or someone elses displayname
 <br>Usage: /unnick [player: target]
-<br>Aliases: /
+<br>Aliases: none
 <br>Permission: changedisplayname.command.unnick
 
 # Permissions
