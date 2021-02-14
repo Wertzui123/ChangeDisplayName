@@ -6,6 +6,7 @@ ChangeDisplayName lets you change your displayname (nickname).
 - PurePerms support
 - Custom nickname format
 - Advanced (messages) configuration
+- Banned nicknames
 - /realname
 - /unnick
 
