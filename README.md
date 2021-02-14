@@ -36,7 +36,7 @@ All command permissions and:
 Lets you use /unnick on other players
 <br>Default permission state: op
   
-# Ideas, Questions and Support
+# Ideas, Questions, and Support
 You can contact me in <a href="https://discord.gg/eGhZGtF">my discord server</a> or <a href="https://github.com/Wertzui123/ChangeDisplayName/issues/new">create an issue</a>/<a href="https://github.com/Wertzui123/ChangeDisplayName/discussions/new">start a discussion</a>.
 
 # License
