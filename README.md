@@ -1,6 +1,6 @@
 # ChangeDisplayName
 ChangeDisplayName lets you change your displayname (nickname).
-<br>The .phar file can be found on <a href="https://poggit.pmmp.io/ci/Wertzui123/ChangeDisplayName/ChangeDisplayName">poggit</a>.
+<br>The .phar file can be found on <a href="https://poggit.pmmp.io/p/ChangeDisplayName">poggit</a>.
 
 # Features
 - PurePerms support
