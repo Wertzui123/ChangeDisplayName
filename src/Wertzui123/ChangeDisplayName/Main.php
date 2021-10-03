@@ -31,7 +31,6 @@ class Main extends PluginBase
         $this->getServer()->getCommandMap()->register("ChangeDisplayName", new nick($this));
         $this->getServer()->getCommandMap()->register("ChangeDisplayName", new realname($this));
         $this->getServer()->getCommandMap()->register("ChangeDisplayName", new unnick($this));
-
     }
 
     /**
