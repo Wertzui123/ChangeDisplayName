@@ -4,12 +4,12 @@ namespace Wertzui123\ChangeDisplayName\commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 use Wertzui123\ChangeDisplayName\Main;
 
-class nick extends Command implements PluginIdentifiableCommand
+class nick extends Command implements PluginOwned
 {
 
     private $plugin;
@@ -36,11 +36,11 @@ class nick extends Command implements PluginIdentifiableCommand
             return;
         }
         $displayName = implode(' ', $args);
-        if(in_array($displayName, $this->plugin->getConfig()->get('banned_nicknames'))) {
+        if (in_array($displayName, $this->plugin->getConfig()->get('banned_nicknames'))) {
             $sender->sendMessage($this->plugin->getMessage('command.nick.banned'));
             return;
         }
-        if($this->plugin->getPlayerByNickname($displayName) !== null && $this->plugin->getServer()->getPlayerExact($displayName) !== null){
+        if ($this->plugin->getPlayerByNickname($displayName) !== null && $this->plugin->getServer()->getPlayerExact($displayName) !== null) {
             $sender->sendMessage($this->plugin->getMessage('command.nick.alreadyTaken'));
             return;
         }
@@ -60,10 +60,13 @@ class nick extends Command implements PluginIdentifiableCommand
         } else {
             $sender->setNameTag($format);
         }
+        foreach ($sender->getServer()->getOnlinePlayers() as $player) {
+            $player->getNetworkSession()->syncPlayerList($this->plugin->getServer()->getOnlinePlayers());
+        }
         $sender->sendMessage($this->plugin->getMessage('command.nick.success', ['{displayname}' => $displayName]));
     }
 
-    public function getPlugin(): Plugin
+    public function getOwningPlugin(): Plugin
     {
         return $this->plugin;
     }

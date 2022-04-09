@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Wertzui123\ChangeDisplayName;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
@@ -28,9 +28,9 @@ class Main extends PluginBase
     {
         $this->configUpdater();
         $this->stringsFile = new Config($this->getDataFolder() . 'strings.yml', Config::YAML);
-        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new nick($this));
-        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new realname($this));
-        $this->getServer()->getCommandMap()->register("ChangeDisplayName", new unnick($this));
+        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new nick($this));
+        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new realname($this));
+        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new unnick($this));
     }
 
     /**
@@ -76,7 +76,7 @@ class Main extends PluginBase
      * @param mixed $default [optional]
      * @return string|mixed
      */
-    public function getString(string $key, $replace = [], $default = "")
+    public function getString(string $key, $replace = [], $default = '')
     {
         return str_replace(array_keys($replace), $replace, $this->getStringsFile()->getNested($key, $default));
     }
@@ -89,7 +89,7 @@ class Main extends PluginBase
      * @param mixed $default [optional]
      * @return string|mixed
      */
-    public function getMessage(string $key, $replace = [], $default = "")
+    public function getMessage(string $key, $replace = [], $default = '')
     {
         return $this->getString($key, $replace, $default);
     }

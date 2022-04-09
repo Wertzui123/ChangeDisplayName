@@ -4,12 +4,12 @@ namespace Wertzui123\ChangeDisplayName\commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 use Wertzui123\ChangeDisplayName\Main;
 
-class unnick extends Command implements PluginIdentifiableCommand
+class unnick extends Command implements PluginOwned
 {
 
     private $plugin;
@@ -28,36 +28,38 @@ class unnick extends Command implements PluginIdentifiableCommand
             return;
         }
         if (isset($args[0])) {
-            $player = $this->plugin->getPlayerByNickname(implode(' ', $args)) ?? $this->plugin->getServer()->getPlayer(implode(' ', $args)) ?? $sender;
+            $player = $this->plugin->getPlayerByNickname(implode(' ', $args)) ?? $this->plugin->getServer()->getPlayerByPrefix(implode(' ', $args)) ?? $sender;
         } else {
             $player = $sender;
-        }
-        if ($player === $sender) {
             if (!$sender instanceof Player) {
                 $sender->sendMessage($this->plugin->getMessage('command.unnick.runIngame'));
                 return;
             }
-            $player->setDisplayName($player->getName());
+        }
+        $player->setDisplayName($player->getName());
+        if ($this->plugin->getServer()->getPluginManager()->getPlugin('PurePerms')) {
+            $purePerms = $this->plugin->getServer()->getPluginManager()->getPlugin('PurePerms');
+            $group = $purePerms->getGroup($purePerms->getUserDataMgr()->getData($player)['group']);
+        } else {
+            $purePerms = null;
+            $group = '/';
+        }
+        if ($purePerms !== null) {
+            $purePerms->setGroup($player, $group);
+        } else {
+            $player->setNameTag($player->getName());
+        }
+        foreach ($sender->getServer()->getOnlinePlayers() as $player) {
+            $player->getNetworkSession()->syncPlayerList($this->plugin->getServer()->getOnlinePlayers());
+        }
+        if ($player === $sender) {
             $sender->sendMessage($this->plugin->getMessage('command.unnick.success.self'));
         } else {
-            $player->setDisplayName($player->getName());
-            if ($this->plugin->getServer()->getPluginManager()->getPlugin('PurePerms')) {
-                $purePerms = $this->plugin->getServer()->getPluginManager()->getPlugin('PurePerms');
-                $group = $purePerms->getGroup($purePerms->getUserDataMgr()->getData($player)['group']);
-            } else {
-                $purePerms = null;
-                $group = '/';
-            }
-            if ($purePerms !== null) {
-                $purePerms->setGroup($player, $group);
-            } else {
-                $player->setNameTag($player->getName());
-            }
             $sender->sendMessage($this->plugin->getMessage('command.unnick.success.other', ['{player}' => $player->getName()]));
         }
     }
 
-    public function getPlugin(): Plugin
+    public function getOwningPlugin(): Plugin
     {
         return $this->plugin;
     }

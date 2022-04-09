@@ -4,12 +4,12 @@ namespace Wertzui123\ChangeDisplayName\commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 use Wertzui123\ChangeDisplayName\Main;
 
-class realname extends Command implements PluginIdentifiableCommand
+class realname extends Command implements PluginOwned
 {
 
     private $plugin;
@@ -38,10 +38,9 @@ class realname extends Command implements PluginIdentifiableCommand
         } else {
             $sender->sendMessage($this->plugin->getMessage('command.realname.noPlayer'));
         }
-        return;
     }
 
-    public function getPlugin(): Plugin
+    public function getOwningPlugin(): Plugin
     {
         return $this->plugin;
     }
