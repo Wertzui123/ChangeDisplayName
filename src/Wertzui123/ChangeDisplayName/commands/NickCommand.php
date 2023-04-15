@@ -9,7 +9,7 @@ use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
 use Wertzui123\ChangeDisplayName\Main;
 
-class nick extends Command implements PluginOwned
+class NickCommand extends Command implements PluginOwned
 {
 
     private $plugin;
@@ -17,7 +17,7 @@ class nick extends Command implements PluginOwned
     public function __construct(Main $plugin)
     {
         parent::__construct($plugin->getConfig()->getNested('command.nick.command'), $plugin->getConfig()->getNested('command.nick.description'), $plugin->getConfig()->getNested('command.nick.usage'), $plugin->getConfig()->getNested('command.nick.aliases'));
-        $this->setPermission('changedisplayname.command.nick');
+        $this->setPermissions(['changedisplayname.command.nick']);
         $this->plugin = $plugin;
     }
 
@@ -27,7 +27,7 @@ class nick extends Command implements PluginOwned
             $sender->sendMessage($this->plugin->getMessage('command.nick.runIngame'));
             return;
         }
-        if (!$sender->hasPermission($this->getPermission())) {
+        if (!$sender->hasPermission($this->getPermissions()[0])) {
             $sender->sendMessage($this->plugin->getMessage('command.nick.noPermission'));
             return;
         }

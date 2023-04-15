@@ -9,7 +9,7 @@ use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
 use Wertzui123\ChangeDisplayName\Main;
 
-class realname extends Command implements PluginOwned
+class RealnameCommand extends Command implements PluginOwned
 {
 
     private $plugin;
@@ -17,13 +17,13 @@ class realname extends Command implements PluginOwned
     public function __construct(Main $plugin)
     {
         parent::__construct($plugin->getConfig()->getNested('command.realname.command'), $plugin->getConfig()->getNested('command.realname.description'), $plugin->getConfig()->getNested('command.realname.usage'), $plugin->getConfig()->getNested('command.realname.aliases'));
-        $this->setPermission('changedisplayname.command.realname');
+        $this->setPermissions(['changedisplayname.command.realname']);
         $this->plugin = $plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if (!$sender->hasPermission($this->getPermission())) {
+        if (!$sender->hasPermission($this->getPermissions()[0])) {
             $sender->sendMessage($this->plugin->getMessage('command.realname.noPermission'));
             return;
         }

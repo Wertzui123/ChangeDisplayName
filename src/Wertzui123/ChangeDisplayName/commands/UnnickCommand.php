@@ -9,7 +9,7 @@ use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
 use Wertzui123\ChangeDisplayName\Main;
 
-class unnick extends Command implements PluginOwned
+class UnnickCommand extends Command implements PluginOwned
 {
 
     private $plugin;
@@ -17,13 +17,13 @@ class unnick extends Command implements PluginOwned
     public function __construct(Main $plugin)
     {
         parent::__construct($plugin->getConfig()->getNested('command.unnick.command'), $plugin->getConfig()->getNested('command.unnick.description'), $plugin->getConfig()->getNested('command.unnick.usage'), $plugin->getConfig()->getNested('command.unnick.aliases'));
-        $this->setPermission('changedisplayname.command.unnick');
+        $this->setPermissions(['changedisplayname.command.unnick']);
         $this->plugin = $plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if (!$sender->hasPermission($this->getPermission())) {
+        if (!$sender->hasPermission($this->getPermissions()[0])) {
             $sender->sendMessage($this->plugin->getMessage('command.unnick.noPermission'));
             return;
         }

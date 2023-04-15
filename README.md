@@ -29,7 +29,7 @@ You can contact me in <a href="https://discord.gg/eGhZGtF">my discord server</a>
 
 # License
 ChangeDisplayName is licensed under the GNU General Public License v3.0. For more information: https://choosealicense.com/licenses/gpl-3.0
-<br><code>© 2019 - 2022 Wertzui123</code>
+<br><code>© 2019 - 2023 Wertzui123</code>
 
 # Credits
 ChangeDisplayName was written by Wertzui123.

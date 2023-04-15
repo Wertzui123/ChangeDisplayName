@@ -8,9 +8,9 @@ use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
-use Wertzui123\ChangeDisplayName\commands\nick;
-use Wertzui123\ChangeDisplayName\commands\realname;
-use Wertzui123\ChangeDisplayName\commands\unnick;
+use Wertzui123\ChangeDisplayName\commands\NickCommand;
+use Wertzui123\ChangeDisplayName\commands\RealnameCommand;
+use Wertzui123\ChangeDisplayName\commands\UnnickCommand;
 
 class Main extends PluginBase
 {
@@ -28,9 +28,9 @@ class Main extends PluginBase
     {
         $this->configUpdater();
         $this->stringsFile = new Config($this->getDataFolder() . 'strings.yml', Config::YAML);
-        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new nick($this));
-        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new realname($this));
-        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new unnick($this));
+        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new NickCommand($this));
+        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new RealnameCommand($this));
+        $this->getServer()->getCommandMap()->register('ChangeDisplayName', new UnnickCommand($this));
     }
 
     /**
