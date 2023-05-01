@@ -1,6 +1,6 @@
 name: ChangeDisplayName
 main: Wertzui123\ChangeDisplayName\Main
-version: "4.2"
+version: "4.2.1"
 api: 5.0.0
 load: POSTWORLD
 author: Wertzui123

@@ -18,15 +18,12 @@ class RealnameCommand extends Command implements PluginOwned
     {
         parent::__construct($plugin->getConfig()->getNested('command.realname.command'), $plugin->getConfig()->getNested('command.realname.description'), $plugin->getConfig()->getNested('command.realname.usage'), $plugin->getConfig()->getNested('command.realname.aliases'));
         $this->setPermissions(['changedisplayname.command.realname']);
+        $this->setPermissionMessage($plugin->getMessage('command.realname.noPermission'));
         $this->plugin = $plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if (!$sender->hasPermission($this->getPermissions()[0])) {
-            $sender->sendMessage($this->plugin->getMessage('command.realname.noPermission'));
-            return;
-        }
         if (!isset($args[0])) {
             $sender->sendMessage($this->plugin->getMessage('command.realname.passPlayer'));
             return;

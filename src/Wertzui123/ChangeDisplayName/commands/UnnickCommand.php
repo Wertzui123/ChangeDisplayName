@@ -18,15 +18,12 @@ class UnnickCommand extends Command implements PluginOwned
     {
         parent::__construct($plugin->getConfig()->getNested('command.unnick.command'), $plugin->getConfig()->getNested('command.unnick.description'), $plugin->getConfig()->getNested('command.unnick.usage'), $plugin->getConfig()->getNested('command.unnick.aliases'));
         $this->setPermissions(['changedisplayname.command.unnick']);
+        $this->setPermissionMessage($plugin->getMessage('command.unnick.noPermission'));
         $this->plugin = $plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if (!$sender->hasPermission($this->getPermissions()[0])) {
-            $sender->sendMessage($this->plugin->getMessage('command.unnick.noPermission'));
-            return;
-        }
         if (isset($args[0])) {
             $player = $this->plugin->getPlayerByNickname(implode(' ', $args)) ?? $this->plugin->getServer()->getPlayerByPrefix(implode(' ', $args)) ?? $sender;
         } else {

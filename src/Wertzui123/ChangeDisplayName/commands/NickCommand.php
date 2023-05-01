@@ -18,6 +18,7 @@ class NickCommand extends Command implements PluginOwned
     {
         parent::__construct($plugin->getConfig()->getNested('command.nick.command'), $plugin->getConfig()->getNested('command.nick.description'), $plugin->getConfig()->getNested('command.nick.usage'), $plugin->getConfig()->getNested('command.nick.aliases'));
         $this->setPermissions(['changedisplayname.command.nick']);
+        $this->setPermissionMessage($plugin->getMessage('command.nick.noPermission'));
         $this->plugin = $plugin;
     }
 
@@ -25,10 +26,6 @@ class NickCommand extends Command implements PluginOwned
     {
         if (!$sender instanceof Player) {
             $sender->sendMessage($this->plugin->getMessage('command.nick.runIngame'));
-            return;
-        }
-        if (!$sender->hasPermission($this->getPermissions()[0])) {
-            $sender->sendMessage($this->plugin->getMessage('command.nick.noPermission'));
             return;
         }
         if (!isset($args[0])) {
